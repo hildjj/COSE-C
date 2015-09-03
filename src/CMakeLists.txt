@@ -2,7 +2,7 @@
 #  compiling/installing sources for COSE-C
 #
 
-set ( cose_sources 
+set ( cose_sources
 	Cose.c
 	MacMessage.c
 	openssl.c
@@ -22,6 +22,8 @@ add_library ( cose-c SHARED ${cose_sources} )
 target_include_directories ( cose-c PRIVATE ${OPENSSL_INCLUDE_DIR} )
 target_include_directories ( cose-c PUBLIC ${dist_dir}/include )
 target_include_directories ( cose-c PRIVATE ../src )
+target_link_libraries ( cose-c PRIVATE  ${OPENSSL_LIBRARIES} )
+target_link_libraries ( cose-c PRIVATE cn-cbor )
 
 install ( TARGETS cose-c
 	LIBRARY DESTINATION lib
