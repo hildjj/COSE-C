@@ -29,6 +29,8 @@ addons:
     - clang-3.8
 script:
   - cmake --version
+  - clang --version
+  - gcov --version
   - git clone --depth 1 git://github.com/cose-wg/Examples Examples
   - mkdir build
   - cd build && cmake -Duse_context=$USE_CONTEXT -Dcoveralls_send=ON -Duse_embedtls=$USE_EMBEDTLS .. && make all test
