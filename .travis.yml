@@ -1,15 +1,15 @@
 language: c
 compiler:
-  - clang
-  - gcc
+  - clang-3.8
+#  - gcc
 sudo: false
 before_install:
   - pip install cpp-coveralls --user
   - export LD_LIBRARY_PATH=$PWD/build/dist/lib:$LD_LIBRARY_PATH
 env:
   - USE_CONTEXT=ON
-  - USE_CONTEXT=OFF
-  - USE_CONTEXT=OFF USE_EMBEDTLS=ON
+  # - USE_CONTEXT=OFF
+  # - USE_CONTEXT=OFF USE_EMBEDTLS=ON
 matrix:
   exclude:
     - compiler: gcc
@@ -19,11 +19,14 @@ matrix:
 addons:
   apt:
     sources:
+      -  ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.8
       - george-edison55-precise-backports
     packages:
     - libssl-dev
     - cmake
     - cmake-data
+    - clang-3.8
 script:
   - git clone git://github.com/cose-wg/Examples Examples
   - mkdir build
